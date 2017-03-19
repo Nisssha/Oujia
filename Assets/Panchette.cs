@@ -1,104 +1,139 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Panchette : MonoBehaviour {
 
 private Vector3 letterPosition;
 private Vector3 startPosition;
-private float secondsForOneLength = 10f;
-private string[] answer;
-//	public float speed;
-//	public float step;
-//	string letter;
+private Vector3 currentPosition;
+private float secondsForOneLength = 5f; 
+private char[] answer;
+private float startTime;
+int i = 0;
 
-//	private Transform startMarker;
-//    private Vector3 endMarker;
-//    public float speed = 1.0F;
-//    private float startTime;
-//    private float journeyLength;
-//
-//    void Start() {
-//
-//    	startMarker = transform;
-//		endMarker = new Vector3(-241f, -10f, 0f);
-//        startTime = Time.time;
-//        journeyLength = Vector3.Distance(startMarker.position, endMarker);
-//    }
-//    void Update() {
-//        float distCovered = (Time.time - startTime) * speed;
-//        float fracJourney = distCovered / journeyLength;
-//        transform.position = Vector3.Lerp(startMarker.position, endMarker, fracJourney);
-//    }
-//
-//
+    public InputField input;
+    public GameObject a, b, c, d, e, f ,g, h, iletter, j, k, l, m;
+    public GameObject n, o, p, r, s, t, v, u, w, q, z, x, y;
+    public GameObject n1, n2, n3, n4, n5, n6, n7, n8, n9, n0;
+    public GameObject yes, no, goodbye;
 
-void Start () {
+
+void Start ()
+    {
 	startPosition = transform.position; 
-	Debug.Log(startPosition);
-//	letter = "a";
-	MovePanchette("a");
-}
-
+	currentPosition = startPosition;
+	letterPosition = currentPosition;
+    }
 
 void Update () {
-//	MovePanchette("a");
-for (int i = 0; i < answer.Length; i++){
-if (answer[i] != ""){
-	if (letterPosition != startPosition){
-		transform.position = Vector3.Lerp(startPosition, letterPosition,     Mathf.SmoothStep(0f,1f, Time.time/secondsForOneLength));
-		Debug.Log (transform.position);
-	}
-}
-}
+
+        //handling situation where panchette reached goal position
+        //sets new letter, adds to the i in the letter array and sets start position as current position
+	if (letterPosition == currentPosition && answer.Length >i)
+                                            {
+											SetNextLetter(); 
+											i++;
+											startPosition = currentPosition;
+											}
+
+    //moving the letter smoothly from start position to goal (current letter) position
+	if (letterPosition != currentPosition)
+        {
+		transform.position = Vector3.Lerp(startPosition, letterPosition,     Mathf.SmoothStep(0f,1f, (Time.time-startTime)/secondsForOneLength));
+		currentPosition = transform.position;
+	    }
 }
 
+    //set i to 0, and transform string answer into char array
+public void SetAnswer ()
+    {
+	i = 0;
+	answer = input.text.ToCharArray();
+	input.text = "";
+    }
+
+    //setting goal position according to char in an array
+public void SetNextLetter ()
+    {
+	    if(answer[i] == 'a'){letterPosition = a.transform.position;}
+	    else if(answer[i] == 'b'){ letterPosition = b.transform.position; }
+	    else if(answer[i] == 'c'){ letterPosition = c.transform.position; }
+	    else if(answer[i] == 'd'){ letterPosition = d.transform.position; }
+	    else if(answer[i] == 'e'){ letterPosition = e.transform.position; }
+	    else if(answer[i] == 'f') { letterPosition = f.transform.position; }
+	    else if(answer[i] == 'g') { letterPosition = g.transform.position; }
+	    else if(answer[i] == 'h') { letterPosition = h.transform.position; }
+	    else if(answer[i] == 'i') { letterPosition = iletter.transform.position; }
+	    else if(answer[i] == 'j') { letterPosition = j.transform.position; }
+	    else if(answer[i] == 'k') { letterPosition = k.transform.position; }
+	    else if(answer[i] == 'l') { letterPosition = l.transform.position; }
+	    else if(answer[i] == 'm') { letterPosition = m.transform.position; }
+	    else if(answer[i] == 'n') { letterPosition = n.transform.position; }
+	    else if(answer[i] == 'o') { letterPosition = o.transform.position; }
+	    else if(answer[i] == 'p') { letterPosition = p.transform.position; }
+	    else if(answer[i] == 'q') { letterPosition = q.transform.position; }
+	    else if(answer[i] == 'r') { letterPosition = r.transform.position; }
+	    else if(answer[i] == 's') { letterPosition = s.transform.position; }
+	    else if(answer[i] == 't') { letterPosition = t.transform.position; }
+	    else if(answer[i] == 'u') { letterPosition = u.transform.position; }
+	    else if(answer[i] == 'v') { letterPosition = v.transform.position; }
+	    else if(answer[i] == 'w') { letterPosition = w.transform.position; }
+	    else if(answer[i] == 'x') { letterPosition = x.transform.position; }
+	    else if(answer[i] == 'y') { letterPosition = y.transform.position; }
+	    else if(answer[i] == 'z') { letterPosition = z.transform.position; }
 
 
-public void MovePanchette (string letter) { //for single letter, do for array later
+        else if (answer[i] == 'A') { letterPosition = a.transform.position; }
+        else if (answer[i] == 'B') { letterPosition = b.transform.position; }
+        else if (answer[i] == 'C') { letterPosition = c.transform.position; }
+        else if (answer[i] == 'D') { letterPosition = d.transform.position; }
+        else if (answer[i] == 'E') { letterPosition = e.transform.position; }
+        else if (answer[i] == 'F') { letterPosition = f.transform.position; }
+        else if (answer[i] == 'G') { letterPosition = g.transform.position; }
+        else if (answer[i] == 'H') { letterPosition = h.transform.position; }
+        else if (answer[i] == 'I') { letterPosition = iletter.transform.position; }
+        else if (answer[i] == 'J') { letterPosition = j.transform.position; }
+        else if (answer[i] == 'K') { letterPosition = k.transform.position; }
+        else if (answer[i] == 'L') { letterPosition = l.transform.position; }
+        else if (answer[i] == 'M') { letterPosition = m.transform.position; }
+        else if (answer[i] == 'N') { letterPosition = n.transform.position; }
+        else if (answer[i] == 'O') { letterPosition = o.transform.position; }
+        else if (answer[i] == 'P') { letterPosition = p.transform.position; }
+        else if (answer[i] == 'Q') { letterPosition = q.transform.position; }
+        else if (answer[i] == 'R') { letterPosition = r.transform.position; }
+        else if (answer[i] == 'S') { letterPosition = s.transform.position; }
+        else if (answer[i] == 'T') { letterPosition = t.transform.position; }
+        else if (answer[i] == 'U') { letterPosition = u.transform.position; }
+        else if (answer[i] == 'V') { letterPosition = v.transform.position; }
+        else if (answer[i] == 'W') { letterPosition = w.transform.position; }
+        else if (answer[i] == 'X') { letterPosition = x.transform.position; }
+        else if (answer[i] == 'Y') { letterPosition = y.transform.position; }
+        else if (answer[i] == 'Z') { letterPosition = z.transform.position; }
 
-	if(letter == "a"){letterPosition = new Vector3 (-7.38f, -0.08f, 90f);}
-//	else if(letter == "b"){letterPosition = new Vector3 (-6.15f, -0.65f, 90f);}
-//	else if(letter == "c"){letterPosition = new Vector3 (-5.07f, 1.05f, 90f);}
-//	else if(letter == "d"){letterPosition = new Vector3 (-3.9f, 1.42f, 90f);}
-//	else if(letter == "e"){letterPosition = new Vector3 (-2.73f, 1.64f, 90f);}
-//	else if(letter == "f"){letterPosition = new Vector3 (-1.62f, 1.7f, 90f);}
-//	else if(letter == "g"){letterPosition = new Vector3 (-0.45f, 1.82f, 90f);}
-//	else if(letter == "h"){letterPosition = new Vector3 (0.94f, 1.76f, 90f);}
-//	else if(letter == "i"){letterPosition = new Vector3 (1.96f, 1.67f, 90f);}
-//	else if(letter == "j"){letterPosition = new Vector3 (2.82f, 1.48f, 90f);}
-//	else if(letter == "k"){letterPosition = new Vector3 (4.14f, 1.26f, 90f);}
-//	else if(letter == "l"){letterPosition = new Vector3 (5.46f, 0.83f, 90f);}
-//	else if(letter == "m"){letterPosition = new Vector3 (6.54f, 0.31f, 90f);}
-//	else if(letter == "n"){letterPosition = new Vector3 (-7.26f, -1.85f, 90f);}
-//	else if(letter == "o"){letterPosition = new Vector3 (-6.21f, -1.23f, 90f);}
-//	else if(letter == "p"){letterPosition = new Vector3 (-5.2f, -0.74f, 90f);}
-//	else if(letter == "q"){letterPosition = new Vector3 (-4.09f, -0.34f, 90f);}
-//	else if(letter == "r"){letterPosition = new Vector3 (-2.89f, -0.06f, 90f);}
-//	else if(letter == "s"){letterPosition = new Vector3 (-1.6f, 0.25f, 90f);}
-//	else if(letter == "t"){letterPosition = new Vector3 (-0.52f, 0.25f, 90f);}
-//	else if(letter == "u"){letterPosition = new Vector3 (0.74f, 0.25f, 90f);}
-//	else if(letter == "v"){letterPosition = new Vector3 (2f, 0.25f, 90f);}
-//	else if(letter == "w"){letterPosition = new Vector3 (3.33f, -0.15f, 90f);}
-//	else if(letter == "x"){letterPosition = new Vector3 (4.6f, -0.61f, 90f);}
-//	else if(letter == "y"){letterPosition = new Vector3 (5.65f, -1.1f, 90f);}
-//	else if(letter == "z"){letterPosition = new Vector3 (6.82f, -1.72f, 90f);}
-//	else if(letter == "1"){letterPosition = new Vector3 (-5.35f, -2.67f, 90f);}
-//	else if(letter == "2"){letterPosition = new Vector3 (-4.46f, -2.67f, 90f);}
-//	else if(letter == "3"){letterPosition = new Vector3 (-3.35f, -2.67f, 90f);}
-//	else if(letter == "4"){letterPosition = new Vector3 (-2.18f, -2.67f, 90f);}
-//	else if(letter == "5"){letterPosition = new Vector3 (-1.01f, -2.67f, 90f);}
-//	else if(letter == "6"){letterPosition = new Vector3 (0.19f, -2.67f, 90f);}
-//	else if(letter == "7"){letterPosition = new Vector3 (1.27f, -2.67f, 90f);}
-//	else if(letter == "8"){letterPosition = new Vector3 (2.41f, -2.67f, 90f);}
-//	else if(letter == "9"){letterPosition = new Vector3 (3.55f, -2.67f, 90f);}
-//	else if(letter == "0"){letterPosition = new Vector3 (4.75f, -2.67f, 90f);}
-//	else if(letter == "+"){letterPosition = new Vector3 (-5.29f, 3.84f, 90f);}   //yes
-//	else if(letter == "-"){letterPosition = new Vector3 (4.73f, 3.84f, 90f);}		//no
-//	else if(letter == "/"){letterPosition = new Vector3 (-0.22f, -4.05f, 90f);}	//good bye
 
+        else if(answer[i] == '1'){ letterPosition = n1.transform.position; }
+	    else if(answer[i] == '2'){ letterPosition = n2.transform.position; }
+	    else if(answer[i] == '3'){ letterPosition = n3.transform.position; }
+	    else if(answer[i] == '4'){ letterPosition = n4.transform.position; }
+	    else if(answer[i] == '5'){ letterPosition = n5.transform.position; }
+	    else if(answer[i] == '6'){ letterPosition = n6.transform.position; }
+	    else if(answer[i] == '7'){ letterPosition = n7.transform.position; }
+	    else if(answer[i] == '8'){ letterPosition = n8.transform.position; }
+	    else if(answer[i] == '9'){ letterPosition = n9.transform.position; }
+	    else if(answer[i] == '0'){ letterPosition = n0.transform.position; }
+	    else if(answer[i] == '+'){ letterPosition = yes.transform.position; }   //yes
+	    else if(answer[i] == '-'){ letterPosition = no.transform.position; }		//no
+	    else if(answer[i] == '/'){ letterPosition = goodbye.transform.position; }	//good bye
+
+	    else if(answer[i] == ' '){letterPosition = currentPosition;}
+
+        //setting start time of the movement
+        startTime = Time.time;
+    }
 }
-}
+
 
 
 
